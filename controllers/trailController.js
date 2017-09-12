@@ -44,6 +44,7 @@ function update(req, res) {
 
 function create(req, res) {
   var newTrail = new Trail(req.body);
+  console.log(newTrail);
   newTrail.save(function(err,trail){
     if(err){
       console.log("post error: " + err);

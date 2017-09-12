@@ -5,10 +5,18 @@ var express = require('express');
 // generate a new express app and call it 'app'
 var app = express();
 var bodyParser = require('body-parser');
+var cors = require('cors');
 
 // serve static files from public folder
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 
 var controllers = require('./controllers');
 
@@ -43,6 +51,6 @@ app.delete("/api/trails/:id", controllers.trails.destroy);
   **********/
 
  // listen on port 3000
- app.listen(process.env.PORT || 3000, function () {
-   console.log("Express server is running on http://localhost:3000/");
+ app.listen(process.env.PORT || 8000, function () {
+   console.log("Express server is running on http://localhost:8000/");
  });
